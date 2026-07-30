@@ -51,9 +51,12 @@ public class MailboxEventHandler implements RequestHandler<SQSEvent, String> {
             //   in which case we close resources before timing out.
             //   Frontal functions might have the same issue also.
             new Thread(() -> onHandled(applicationContext)));
+
     var eventConsumer = applicationContext.getBean(EventConsumer.class);
     var messageConverter = applicationContext.getBean(ConsumableEventTyper.class);
+
     eventConsumer.accept(messageConverter.apply(messages));
+
     onHandled(applicationContext);
     return "ok";
   }
