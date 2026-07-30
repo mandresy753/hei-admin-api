@@ -12,7 +12,6 @@ import school.hei.haapi.concurrency.Workers;
 import school.hei.haapi.endpoint.event.consumer.model.ConsumableEvent;
 
 @PojaGenerated
-
 @Component
 @Slf4j
 public class EventConsumer implements Consumer<List<ConsumableEvent>> {

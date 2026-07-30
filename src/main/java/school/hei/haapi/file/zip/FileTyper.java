@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import school.hei.haapi.PojaGenerated;
 
 @PojaGenerated
-
 @Component
 public class FileTyper implements Function<File, MediaType> {
 

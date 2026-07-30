@@ -13,9 +13,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.Duration;
 import school.hei.haapi.PojaApplication;
-import school.hei.haapi.PojaGenerated;
-
-
 
 public class LambdaHandler implements RequestStreamHandler {
   private static final SpringBootLambdaContainerHandler<HttpApiV2ProxyRequest, AwsProxyResponse>

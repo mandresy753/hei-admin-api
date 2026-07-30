@@ -10,7 +10,6 @@ import school.hei.haapi.endpoint.rest.controller.health.HealthDbController;
 import school.hei.haapi.endpoint.rest.controller.health.PingController;
 
 @PojaGenerated
-
 class HealthControllerIT extends school.hei.haapi.integration.conf.FacadeITMockedThirdParties {
 
   @Autowired PingController pingController;

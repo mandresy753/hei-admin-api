@@ -7,7 +7,6 @@ import lombok.Setter;
 import school.hei.haapi.PojaGenerated;
 
 @PojaGenerated
-
 @Entity
 @Getter
 @Setter

@@ -21,7 +21,6 @@ import software.amazon.awssdk.services.sqs.model.ChangeMessageVisibilityRequest;
 import software.amazon.awssdk.services.sqs.model.DeleteMessageRequest;
 
 @PojaGenerated
-
 @Component
 @Slf4j
 @AllArgsConstructor

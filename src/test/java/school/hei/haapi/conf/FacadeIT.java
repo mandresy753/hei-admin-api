@@ -12,7 +12,6 @@ import org.springframework.test.context.DynamicPropertySource;
 import school.hei.haapi.PojaGenerated;
 
 @PojaGenerated
-
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Slf4j
 public class FacadeIT {

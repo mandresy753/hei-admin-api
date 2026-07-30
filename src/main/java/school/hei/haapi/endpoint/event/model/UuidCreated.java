@@ -11,7 +11,6 @@ import lombok.ToString;
 import school.hei.haapi.PojaGenerated;
 
 @PojaGenerated
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

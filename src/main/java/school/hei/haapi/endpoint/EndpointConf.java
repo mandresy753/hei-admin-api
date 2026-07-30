@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Primary;
 import school.hei.haapi.PojaGenerated;
 
 @PojaGenerated
-
 @Configuration
 public class EndpointConf {
   @Bean
