@@ -23,30 +23,30 @@ public class Workers<T> implements Function<List<Callable<T>>, List<T>> {
     this.executorService = newVirtualThreadPerTaskExecutor();
   }
 
-    @Override
-    public List<T> apply(List<Callable<T>> callables) {
+  @Override
+  public List<T> apply(List<Callable<T>> callables) {
     var parentThread = currentThread();
     callables =
         callables.stream()
             .map(
                 c ->
-                        (Callable<T>)
+                    (Callable<T>)
                         () -> {
                           renameThread(
                               parentThread, getRandomSubThreadNamePrefixFrom(parentThread));
                           return c.call();
                         })
             .toList();
-        List<Future<T>> futures;
-        try {
-            futures = executorService.invokeAll(callables);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    List<Future<T>> futures;
+    try {
+      futures = executorService.invokeAll(callables);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
     return futures.stream().map(this::handleFutureException).toList();
   }
 
-    private T handleFutureException(Future<T> future) {
+  private T handleFutureException(Future<T> future) {
     try {
       return future.get();
     } catch (InterruptedException | ExecutionException e) {
