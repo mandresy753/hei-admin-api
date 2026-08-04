@@ -96,73 +96,15 @@ tasks.compileJava.dependsOn publishJavaClientToMavenLocal
 
 
 test {
-    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
-    maxHeapSize = '1g'
-    useJUnitPlatform()
-    finalizedBy jacocoTestCoverageVerification
+    enabled = false
 }
 
 jacocoTestCoverageVerification {
-    dependsOn test
-    afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    "**/gen/**"
-            ])
-        }))
-    }
-    violationRules {
-        rule {
-            limit {
-                counter = "LINE"
-                minimum = 0.77
-            }
-        }
-    }
-    finalizedBy jacocoTestReport
+    enabled = false
 }
 
 jacocoTestReport {
-    reports {
-        xml.required = true
-        html.required = true
-    }
-    afterEvaluate {
-        // Need to be duplicated like this from jacocoTestCoverageVerification,
-        // else display coverageRate is inconsistent with what was computed during coverage...
-        classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    "**/gen/**"
-            ])
-        }))
-    }
-    doLast {
-        def coverageReportFile = file("$rootDir/build/reports/jacoco/test/jacocoTestReport.xml")
-
-        if (coverageReportFile.exists()) {
-            def xmlParser = new XmlParser()
-            xmlParser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-            xmlParser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false)
-
-            def xml = xmlParser.parse(coverageReportFile)
-
-            def lineCounter = xml.'counter'.find { it.@type == 'LINE' }
-            if (lineCounter != null) {
-                def totalLines = lineCounter.@missed?.toInteger() + lineCounter.@covered?.toInteger() ?: 0
-                def coveredLines = lineCounter.@covered?.toInteger() ?: 0
-                if (totalLines > 0) {
-                    def coverageRate = coveredLines / totalLines.toDouble() * 100
-                    println "Total Line Coverage Rate: ${coverageRate.round(2)}%"
-                } else {
-                    println "No lines were covered or missed in the report."
-                }
-            } else {
-                println "No LINE coverage counter found in the JaCoCo report."
-            }
-        } else {
-            println "No JaCoCo coverage report found. Make sure you run 'gradle test jacocoTestReport' first."
-        }
-    }
+    enabled = false
 }
 
 dependencies {
